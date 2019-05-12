@@ -411,7 +411,7 @@
                               <a href="{% url 'single_music' music.pk %}" class="clear">
                                 <small class="pull-right">上线时间：{{ music.online_time }}</small>
                                 <strong class="block">{{ music.music_name }}</strong>
-                                <small>音乐流派：{{ music.music_kind }} </small>
+                                <a href="{% url 'addmusic' music.pk %}" class="fa fa-plus fa-fw m-r-xs"></a><small class="pull-right">音乐流派：{{ music.music_kind }} </small>
                               </a>
                             </li>
                               {% endfor %}

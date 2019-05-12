@@ -4,7 +4,7 @@ from user.models import Singers,My_list,User_list
 from django.core.paginator import Paginator
 from django.http import HttpResponse,JsonResponse
 from user.forms import Usercommentsform,Mylistform
-from user.views import addmusic
+from user.views import addmusic,showlist
 # Create your views here.
 
 
@@ -12,17 +12,17 @@ def index(request):  #主页
     list = My_list.objects.all()
     data = Music_info.objects.all()
     singers = Singers.objects.all()
-    data = Music_info.objects.all()
+    data = Music_info.objects.all().order_by('-id')
     ranks = data.order_by('-rating')
     new = Music_info.objects.filter(music_kind__name='最新')
-    # global user_list
 
+    user_list = showlist(request)
 
     return render(request,'index.html',{'data':data,
                                         'new':new,
                                         'singers':singers,
                                         'ranks':ranks,
-                                        'user_list':''
+                                        'user_list':user_list,
                                         })
 
 def pagein(request):  #分页函数
@@ -44,33 +44,25 @@ def list(request): #歌单
 
 
 def single(request,music_id): #单个音乐加载并播放
+    commentmodel = Usercommentsform.Meta.model
+    comments = commentmodel.objects.filter(music__id=music_id).order_by('-id')
+    try:
+        music = Music_info.objects.filter(pk=music_id)[0]
+        addmusic(request, music_id)
+    except Exception:
+        return HttpResponse('404', 'bad address, not found')
     if not request.user.is_anonymous:
-        user_id = request.user.pk
-        addmusic(request,music_id,user_id)
-        user_music = My_list.objects.filter(user_id=user_id).order_by('-id')
-        # global user_list
-        user_list = []
-        for mymusic in user_music:
-            try:
-                user_list.append(mymusic)
-            except Exception:
-                return HttpResponse('歌曲已存在')
+        user_list = showlist(request)
+
         data = Music_info.objects.all()
         comment_form = Usercommentsform()
-        try:
-            music = Music_info.objects.filter(pk=music_id)[0]
-        except Exception:
-            return HttpResponse('404','bad address, not found')
 
-
-
-        commentmodel = Usercommentsform.Meta.model
-        comments = commentmodel.objects.filter(music__id=music_id).order_by('-id')
-        return render(request,'test.html',{'music':music,
+        return render(request, 'single.html', {'music':music,
                                            'comment_form':comment_form,
                                            'comments':comments,
                                            'user_list':user_list,
-                                           'data':data})
+                                           'data':data,
+                                          })
     return render(request,'signin.html')
 
 

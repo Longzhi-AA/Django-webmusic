@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^logout$',user_logout,name='user_logout'),
     url(r'^signup$',reg_user,name='user_signup'),
 
+    url(r'^addmusic/(?P<music_id>\d+)$',addmusic,name='addmusic'),
     url(r'^comments/(?P<music_id>\d+)$',user_comments,name='user_comments')
 ]

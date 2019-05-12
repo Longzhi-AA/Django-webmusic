@@ -340,13 +340,14 @@
                   <li class="list-group-item bg-info" >
                     <span class="pull-right" >
                       <a href="#"><i class="fa fa-pencil fa-fw m-r-xs"></i></a>
-                      <a href="#"><i class="fa fa-plus fa-fw m-r-xs"></i></a>
+                      <a href="{% url 'addmusic' music.pk %}"><i class="fa fa-plus fa-fw m-r-xs"></i></a>
                       <a href="#"><i class="fa fa-times fa-fw"></i></a>                  
                     </span>
                       <span class="pull-left media-xs"><i class="fa fa-sort text-muted fa m-r-sm"></i> <small>{{ music.author }} -- </small></span>
                     <a class="clear text-white" style="font-size: larger" href="{% url 'single_music' music.pk %}">
                       &nbsp;&nbsp;{{ music.music_name }}
                     </a>
+
                   </li>
                     {% endfor %}
 {#                  <li class="list-group-item bg-primary">#}

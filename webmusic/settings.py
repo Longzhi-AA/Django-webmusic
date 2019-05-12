@@ -133,3 +133,11 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+# HAYSTACK_CONNECTIONS = {
+#     'default':{
+#         'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+#         'PATH': os.path.join(BASE_DIR,'whoosh_index')}
+#     }
+# HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+

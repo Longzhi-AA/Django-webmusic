@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import check_password, make_password
 from user.forms import Reg_form, Login_form,Usercommentsform,Mylistform
 from music.models import Myusers
-from user.models import Singers
+from user.models import Singers,My_list,Music_info
 from copy import deepcopy
 
 # Create your views here.
@@ -70,25 +70,36 @@ def user_comments(request,music_id):  #用户评论
     res_data = Usercommentsform(data)
     if not res_data.is_valid():
         return redirect(refer_url)
-    if not request.user.is_anonymous:
-        return HttpResponse('用户未登录，无法评论')
     try:
         res_data.save()
     except Exception:
         return  HttpResponse('用户不能重复评论')
     return redirect(refer_url)
 
-def addmusic(request,music_id,user_id):   #增加音乐到歌单
+def addmusic(request,music_id):   #增加音乐到歌单
     refer_url = request.META['HTTP_REFERER']
-    form = Mylistform(request.GET)
-    if form.is_valid():
-        # data = form.cleaned_data
 
-        form.music_id = music_id
-        form.user_id = str(user_id)
-        try:
-            form.save()
+    # if request.method == 'GET':
+    #     form = Mylistform()
+    #     return redirect(refer_url)
+    list_dic={'user_id':request.user.pk,'music_id':int(music_id)}
+    form = Mylistform(list_dic)
+    if not form.is_valid():
+        return HttpResponse('填写格式有误')
+    try:
+        form.save()
+        return redirect(refer_url)
 
-        except Exception:
-            return redirect(refer_url)
+    except Exception:
+        return HttpResponse('添加错误')
+def showlist(request):
+    user_id = request.user.pk
+    user_list = []
+    try:
+        for user_music in My_list.objects.filter(user_id=user_id).order_by('-id'):
+            music_info = Music_info.objects.get(pk=user_music.music_id)
+            user_list.append(music_info)
+    except Exception:
+        return user_list
+    return user_list
 

@@ -89,7 +89,7 @@
 
         </div>
         <div class="comment-block">
-            <form  action="{% url 'user_comments' music.id %}" method='POST'>
+            <form  action="{% url 'user_comments' music.id %}" method='post'>
                 {{ comment_form.context }}
 {#                <textarea name="" id="" cols="30" rows="3" placeholder="Say somthing..." style="background: lightgray"></textarea><br>#}
 {#                <input type="text" name="comment" style="background:lightgray; border-radius: 2%; overflow:hidden; width: 900px; height: 120px"><br>#}
@@ -148,15 +148,18 @@
 {#    </div>#}
 
 </div>
-
+{#<form style="display: none" method="post" id="muid">#}
+{#    <input name="user_id" type="text" value="{{ request.user.pk }}">#}
+{#    <input name="music_id" type="text" value="{{ music.pk }}">#}
+{#</form>#}
 <footer>
-            <body style="height: 800px">
+            <body style="height: 650px">
             <div class="audio-box">
                 <div class="audio-container">
                     <div class="audio-view">
                         <div class="audio-cover"></div>
                         <div class="audio-body">
-                            <h3 class="audio-title">{{ music.music_name }}</h3>
+                            <h3 class="audio-title">未知歌曲</h3>
                             <div class="audio-backs">
                                 <div class="audio-this-time">00:00</div>
                                 <div class="audio-count-time">00:00</div>
@@ -231,6 +234,9 @@
                 })();*/
             </script>
         </footer>
+        <!--<script> f = function () {
+                        onclick = document.getElementById('muid').submit()
+                    }</script>-->
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <!-- Bootstrap -->
         <script src="{% static 'js/bootstrap.js' %}"></script>
