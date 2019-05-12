@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html">
+<head>
+<meta charset="utf-8" />
+<title>{{ music.music_name }}</title><base target="_blank" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static  'comments.css' %}" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'single/Css/tplayer.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'single/Plugins/FontAwesome4.1/css/font-awesome.min.css' %}" />
+    <script src="{% static 'single/Js/jquery.js' %}"></script>
+    <script src="{% static 'single/Js/jquery-ui.js' %}"></script>
+    <script src="{% static 'single/Js/tPlayer.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'player/css/audio.css' %}">
+    <link rel="stylesheet" href="{% static 'js/jPlayer/jplayer.flat.css' %}" type="text/css"/>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+
+    </style>
+<body style="height: 1000px">
+<div style="background-color: lightgray;height: 59px">
+    <div style="position: absolute">
+        <a href="{% url 'index' %}">
+            <img src="{% static 'single/images/homepage.png' %}">
+        </a>
+    </div>
+    <div style="position: relative; margin-top:18px; margin-right: 30px; float: right">
+        {% if request.user.is_anonymous %}
+            <a href="{% url 'user_login' %}" style="margin-right: 20px; display: inline-block; background: darkgray; border-radius: 20% 10%">登录 & 注册</a>
+        {% else %}
+            <span style="margin-right: 20px">Hi, {{ request.user.username }}</span>
+            <a href="{% url 'user_logout' %}" style="margin-right: 20px; display: inline-block; background: darkgray; border-radius: 20% 10%">个人档案</a>
+            <a href="{% url 'user_logout' %}" style="display: inline-block; background: darkgray; border-radius: 20% 10%">退出</a>
+        {% endif %}
+    </div>
+</div>
+
+<div >
+	<!-- 代码 开始 -->
+    <div id="t_wrapper">
+        <div id="t_cover">
+        	<img src="{{ MEDIA_URL }}{{ music.music_img }}">
+        </div>
+    	<div id="t_top">
+    		<div id="t_title_info">
+{#    			<span class="artist"></span>#}
+{#    			<span class="title"></span>#}
+    		</div>
+    	</div>
+    	<div id="t_middle">
+            <div style="margin-left: 250px; font-size: 30px">我这里本来有歌词</div>
+{#    		<div id="play"></div>#}
+{#    		<div id="pause" class="hidden">#}
+{#    		</div>#}
+{#    		<div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" id="t_progress">#}
+{#                <div id="trackInfo">#}
+{#                    <div id="error">#}
+{#    				</div>#}
+{#                    <div id="current">0:00</div>#}
+{#                    <div id="duration">0:00</div>#}
+{#    			</div>#}
+{#    			<div style="width: 0;" class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"></div>#}
+{#            	<span style="left: 0;" class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>#}
+{#            </div>#}
+{#    		<span id="prev"></span>#}
+{#            <span id="next"></span>#}
+    	</div>
+    	<div id="t_bottom">
+{#            <div id="range">#}
+{#                <div id="val"></div>#}
+{#                <div id="vol"></div>#}
+{#                <div id="rangeVal"></div>#}
+{#            </div>#}
+            <div id="t_pls_show" class="noselectpls"></div>
+    	</div>
+    </div>
+
+	<!-- 代码 结束 -->
+</div>
+
+
+<div class="comments">
+
+    <div class="comment-wrap">
+        <div class="photo">
+{#            <img class="avatar" src="{{ MEDIA_URL }}{{ request.user.user_img }}">#}
+
+        </div>
+        <div class="comment-block">
+            <form  action="{% url 'user_comments' music.id %}" method='POST'>
+                {{ comment_form.context }}
+{#                <textarea name="" id="" cols="30" rows="3" placeholder="Say somthing..." style="background: lightgray"></textarea><br>#}
+{#                <input type="text" name="comment" style="background:lightgray; border-radius: 2%; overflow:hidden; width: 900px; height: 120px"><br>#}
+                <input type="submit" value="提交评论" style="background: darkgray; border-radius: 20% 10%">
+            </form>
+        </div>
+    </div>
+
+    {% for comment in comments|slice:"0:3" %}
+    <div class="comment-wrap">
+        <div class="photo">
+{#            <img class="avatar" src="{{ MEDIA_URL }}{{ request.user.user_img }}">#}
+        </div>
+        <div class="comment-block">
+            <p class="comment-text">{{ comment.context }}</p>
+            <div class="bottom-comment">
+                <div class="comment-date">{{ comment.comment_time }}</div>
+                <ul class="comment-actions">
+                    <li class="complain">用户</li>
+                    <li class="reply">{{ comment.user }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{#    <div class="comment-wrap">#}
+{#        <div class="photo">#}
+{#            <div class="avatar" style="background:lightseagreen"></div>#}
+{#        </div>#}
+{#        <div class="comment-block">#}
+{#            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam.</p>#}
+{#            <div class="bottom-comment">#}
+{#                <div class="comment-date">22.2 2014</div>#}
+{#                <ul class="comment-actions">#}
+{#                    <li class="complain">Complain</li>#}
+{#                    <li class="reply">Reply</li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    #}
+{#    <div class="comment-wrap">#}
+{#        <div class="photo">#}
+{#            <div class="avatar" style="background:lightseagreen"></div>#}
+{#        </div>#}
+{#        <div class="comment-block">#}
+{#            <p class="comment-text">{{ comment.context }}</p>#}
+{#            <div class="bottom-comment">#}
+{#                <div class="comment-date">{{ comment.comment_time }}</div>#}
+{#                <ul class="comment-actions">#}
+{#                    <li class="complain">Complain</li>#}
+{#                    <li class="reply">Reply</li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+</div>
+
+<footer>
+            <body style="height: 800px">
+            <div class="audio-box">
+                <div class="audio-container">
+                    <div class="audio-view">
+                        <div class="audio-cover"></div>
+                        <div class="audio-body">
+                            <h3 class="audio-title">{{ music.music_name }}</h3>
+                            <div class="audio-backs">
+                                <div class="audio-this-time">00:00</div>
+                                <div class="audio-count-time">00:00</div>
+                                <div class="audio-setbacks">
+                                    <i class="audio-this-setbacks">
+                                        <span class="audio-backs-btn"></span>
+                                    </i>
+                                    <span class="audio-cache-setbacks">
+							</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="audio-btn">
+                            <div class="audio-select">
+                                <div class="audio-prev"></div>
+                                <div class="audio-play"></div>
+                                <div class="audio-next"></div>
+                                <div class="audio-menu"></div>
+                                <div class="audio-volume"></div>
+                            </div>
+                            <div class="audio-set-volume">
+                                <div class="volume-box">
+                                    <i><span></span></i>
+                                </div>
+                            </div>
+                            <div class="audio-list">
+                                <div class="audio-list-head">
+                                    <p>歌单</p>
+                                    <span class="menu-close">关闭</span>
+                                </div>
+                                <ul class="audio-inline">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </body>
+            <script type="text/javascript" src="{% static 'player/js/jquery.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'player/js/audio.js' %}"></script>
+            <script type="text/javascript">
+                $(function () {
+                    var song = [
+                        {% for i in user_list|slice:'0:6' %}
+
+                            {
+                                'cover': '{{ MEDIA_URL }}{{ i.music_img }}',
+                                'src': '{{ MEDIA_URL }}{{ i.music_audio }}',
+                                'title': '{{ i.music_name }}'
+                            },
+
+                        {% endfor %}
+                    ];
+                    var audioFn = audioPlay({
+                        song: song,
+                        autoPlay: true  //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
+                    });
+                    /* 向歌单中添加新曲目，第二个参数true为新增后立即播放该曲目，false则不播放 */
+                    /*audioFn.newSong({
+                        'cover': 'images/cover5.jpg',
+                        'src': '#',
+                        'title': 'B.A.A.B'
+                    }, false);*/
+
+                });
+                /*var _hmt = _hmt || [];
+                (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?ecbff70bd46d40393c105bbc42edfcad";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+                })();*/
+            </script>
+        </footer>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <!-- Bootstrap -->
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <!-- App -->
+        <script src="{% static 'js/app.js' %}"></script>
+        <script src="{% static 'js/slimscroll/jquery.slimscroll.min.js' %}"></script>
+        <script src="{% static 'js/app.plugin.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jPlayer/jquery.jplayer.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jPlayer/add-on/jplayer.playlist.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jPlayer/demo.js' %}"></script>
+
+</body>
+</html>
