@@ -30,10 +30,9 @@ urlpatterns = [
 
     url(r'^index/', index, name='index'),
     url(r'^single/(?P<music_id>\d+)$',single,name='single_music'),
+    url(r'^profile/(?P<singer_id>\d+)$', profile, name='profile'),
 
-    url(r'^listen/', listen, name='listen'),
     url(r'^list/', list, name='list'),
-    url(r'^video/', video, name='video'),
-    url(r'^player/', player, name='player'),
+
 
 ]

@@ -11,7 +11,7 @@ class Music_kinds(models.Model):
     def __str__(self):
         return self.name
 
-class Music_info(models.Model):
+class Music_info(models.Model):  #音乐信息表
     music_name = models.CharField(max_length=255,verbose_name="音乐名")
     author = models.CharField(max_length=255,verbose_name="歌手")
     music_kind = models.ManyToManyField(Music_kinds)
@@ -25,13 +25,13 @@ class Music_info(models.Model):
     def __str__(self):
         return self.music_name
 
-class Myusers(AbstractUser):
+class Myusers(AbstractUser):  #用户信息表
     user_img = models.ImageField(upload_to='images', null=True, blank=True)
     music_name = models.ManyToManyField(Music_info)
 
 
 
-class Usermoviecomments(models.Model):
+class Usermoviecomments(models.Model):  #用户评论信息表
     user = models.ForeignKey(Myusers,verbose_name="用户名")
     music = models.ForeignKey(Music_info,verbose_name='歌曲名')
     context = models.TextField(verbose_name='评论内容',max_length=1500)

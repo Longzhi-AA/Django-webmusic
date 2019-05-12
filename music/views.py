@@ -8,7 +8,7 @@ from user.views import addmusic
 # Create your views here.
 
 
-def index(request):
+def index(request):  #主页
     list = My_list.objects.all()
     data = Music_info.objects.all()
     singers = Singers.objects.all()
@@ -25,34 +25,20 @@ def index(request):
                                         'user_list':''
                                         })
 
-def pagein(request):
+def pagein(request):  #分页函数
     ranking = Music_info.objects.all().order_by('-rating')
     paginator = Paginator(ranking,7)
     pass
 
-def listen(request):
-    return render(request, 'listen.html')
 
-def list(request):
+
+def list(request): #歌单
+    data = User_list.objects.filter(user=request.user.pk)
+
     return render(request, 'list.html')
-def widgets(request):
-    return render(request, 'widgets.html')
-def video(request):
-    return render(request, 'video.html')
-def player(request):
-    # list = My_list.objects.all()
-    # data = Music_info.objects.all()
-    # newlist=[]
-    # for l in list:
-    #     for d in data:
-    #         if l.author == d.author and l.music_name == d.music_name:
-    #             newlist.append({'cover' : l.music_img,
-	# 		'src' : d.music_audio,
-	# 		'title' : l.music_name})
-    # print(newlist)
-    return render(request, 'test.html',)
 
-def single(request,music_id):
+
+def single(request,music_id): #单个音乐加载并播放
     if not request.user.is_anonymous:
         user_id = request.user.pk
         addmusic(request,music_id,user_id)
@@ -82,3 +68,9 @@ def single(request,music_id):
                                            'data':data})
     return render(request,'signin.html')
 
+
+def profile(request, singer_id):  #歌手个人信息
+    singer_data = Singers.objects.get(pk=singer_id)
+    music_data = Music_info.objects.filter(author=singer_data.name)
+    return render(request,'profile.html',{'singer_data':singer_data,
+                                          'music_data':music_data})

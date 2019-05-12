@@ -4,12 +4,13 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import check_password, make_password
 from user.forms import Reg_form, Login_form,Usercommentsform,Mylistform
 from music.models import Myusers
+from user.models import Singers
 from copy import deepcopy
 
 # Create your views here.
 
 
-def reg_user(request):
+def reg_user(request):  #注册函数
 
     if request.method == 'GET':
         form = Reg_form()
@@ -25,7 +26,7 @@ def reg_user(request):
         return redirect(refer_url.split('/user')[0] + '/index')
 
 
-def user_login(request):
+def user_login(request):  #登录函数
     # refer_url = request.META['HTTP_REFERER']
     if request.method == 'GET':
         form = Login_form()
@@ -53,19 +54,12 @@ def user_login(request):
             return HttpResponse('密码错误')
 
 
-def user_logout(request):
+def user_logout(request):  #退出函数
     refer_url = request.META['HTTP_REFERER']
     logout(request)
     return redirect(refer_url)
 
-def play(request):
-    pass
-
-
-def user_addmusic(request):
-    pass
-
-def user_comments(request,music_id):
+def user_comments(request,music_id):  #用户评论
     refer_url = request.META['HTTP_REFERER']
     data = deepcopy(request.POST)
     try:
@@ -84,16 +78,17 @@ def user_comments(request,music_id):
         return  HttpResponse('用户不能重复评论')
     return redirect(refer_url)
 
-def addmusic(request,music_id,user_id):
+def addmusic(request,music_id,user_id):   #增加音乐到歌单
     refer_url = request.META['HTTP_REFERER']
-    form = Mylistform()
+    form = Mylistform(music_id,user_id)
     if form.is_valid():
         # data = form.cleaned_data
 
         form.music_id = music_id
-        form.user_id = user_id
+        form.user_id = str(user_id)
         try:
             form.save()
 
         except Exception:
             return redirect(refer_url)
+
