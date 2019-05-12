@@ -256,6 +256,11 @@
             <path>
               <item name="webmusic" type="b2602c69:ProjectViewProjectNode" />
               <item name="webmusic" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webmusic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webmusic" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -271,6 +276,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -345,12 +351,12 @@
       <workItem from="1557275017664" duration="25287000" />
       <workItem from="1557362559796" duration="18228000" />
       <workItem from="1557448156370" duration="24558000" />
-      <workItem from="1557535490427" duration="23502000" />
+      <workItem from="1557535490427" duration="23734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104589000" />
+    <option name="totallyTimeSpent" value="104821000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="848" extended-state="6" />
