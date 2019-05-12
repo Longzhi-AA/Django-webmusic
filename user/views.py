@@ -80,7 +80,7 @@ def user_comments(request,music_id):  #用户评论
 
 def addmusic(request,music_id,user_id):   #增加音乐到歌单
     refer_url = request.META['HTTP_REFERER']
-    form = Mylistform(music_id,user_id)
+    form = Mylistform(request.GET)
     if form.is_valid():
         # data = form.cleaned_data
 

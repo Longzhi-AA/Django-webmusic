@@ -33,9 +33,14 @@ def pagein(request):  #分页函数
 
 
 def list(request): #歌单
-    data = User_list.objects.filter(user=request.user.pk)
+    datas = User_list.objects.filter(user=request.user.pk)
+    music_list = []
+    for data in datas:
+        music = data.music_name
+        music_list.append(music)
+    # print(music_list)
 
-    return render(request, 'list.html')
+    return render(request, 'list.html',{'music_list':music_list})
 
 
 def single(request,music_id): #单个音乐加载并播放
