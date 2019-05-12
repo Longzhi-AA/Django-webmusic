@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^profile/(?P<singer_id>\d+)$', profile, name='profile'),
 
     url(r'^list/', list, name='list'),
+    url(r'^favorlist/', favorlist, name='favorlist'),
 
 
 ]

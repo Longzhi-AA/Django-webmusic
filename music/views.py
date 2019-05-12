@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
 from music.models import Music_info,Usermoviecomments,Myusers
-from user.models import Singers,My_list,User_list
+from user.models import Singers,My_list,User_list,My_favorite
 from django.core.paginator import Paginator
 from django.http import HttpResponse,JsonResponse
-from user.forms import Usercommentsform,Mylistform
-from user.views import addmusic,showlist
+from user.forms import Usercommentsform,Mylistform,Myfavorlistform
+from user.views import addmusic,showlist,addfavormusic
 # Create your views here.
 
 
@@ -33,14 +33,27 @@ def pagein(request):  #分页函数
 
 
 def list(request): #歌单
-    datas = User_list.objects.filter(user=request.user.pk)
+    datas = My_list.objects.filter(user_id=request.user.pk)
     music_list = []
     for data in datas:
-        music = data.music_name
+        music = Music_info.objects.get(pk=data.music_id)
         music_list.append(music)
     # print(music_list)
 
     return render(request, 'list.html',{'music_list':music_list})
+def favorlist(request): #歌单
+    music_list = []
+    try:
+        datas = My_favorite.objects.filter(user_id=request.user.pk)
+    except Exception:
+        return music_list
+
+    for data in datas:
+        music = Music_info.objects.get(pk=data.music_id)
+        music_list.append(music)
+    # print(music_list)
+
+    return render(request, 'favorlist.html',{'music_list':music_list})
 
 
 def single(request,music_id): #单个音乐加载并播放

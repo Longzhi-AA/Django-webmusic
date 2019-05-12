@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'music',
     'user',
 
+
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,7 @@ MEDIA_URL = '/media/'
 
 # HAYSTACK_CONNECTIONS = {
 #     'default':{
-#         'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+#         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
 #         'PATH': os.path.join(BASE_DIR,'whoosh_index')}
 #     }
 # HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

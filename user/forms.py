@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from music.models import *
-from user.models import My_list,Myusers
+from user.models import My_list,Myusers,My_favorite
 Myuser = get_user_model()
 
 class Reg_form(forms.ModelForm):
@@ -24,4 +24,9 @@ class Usercommentsform(forms.ModelForm):
 class Mylistform(forms.ModelForm):
     class Meta:
         model = My_list
+        fields = ('user_id','music_id')
+
+class Myfavorlistform(forms.ModelForm):
+    class Meta:
+        model = My_favorite
         fields = ('user_id','music_id')

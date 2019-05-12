@@ -268,15 +268,15 @@
                                         Playlist
                                     </li>
                                     <li>
-                                        <a href="{% url 'list' %}">
+                                        <a href="{% url 'favorlist' %}">
                                             <i class="icon-music-tone icon"></i>
-                                            <span>我的歌单</span>
+                                            <span>我喜欢</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{% url 'list' %}">
                                             <i class="icon-playlist icon text-success-lter"></i>
-                                            <b class="badge bg-success dker pull-right">9</b>
+                                            <b class="badge bg-success dker pull-right"></b>
                                             <span>播放列表</span>
                                         </a>
                                     </li>
@@ -411,7 +411,7 @@
                               <a href="{% url 'single_music' music.pk %}" class="clear">
                                 <small class="pull-right">上线时间：{{ music.online_time }}</small>
                                 <strong class="block">{{ music.music_name }}</strong>
-                                <a href="{% url 'addmusic' music.pk %}" class="fa fa-plus fa-fw m-r-xs"></a><small class="pull-right">音乐流派：{{ music.music_kind }} </small>
+                                <a href="{% url 'addfavormusic' music.pk %}" class="fa fa-plus fa-fw m-r-xs"></a><small class="pull-right">音乐流派：{{ music.music_kind }} </small>
                               </a>
                             </li>
                               {% endfor %}

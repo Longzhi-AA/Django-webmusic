@@ -268,15 +268,15 @@
                                         Playlist
                                     </li>
                                     <li>
-                                        <a href="{% url 'list' %}">
+                                        <a href="{% url 'favorlist' %}">
                                             <i class="icon-music-tone icon"></i>
-                                            <span>我的歌单</span>
+                                            <span>我喜欢</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{% url 'list' %}">
                                             <i class="icon-playlist icon text-success-lter"></i>
-                                            <b class="badge bg-success dker pull-right">9</b>
+                                            <b class="badge bg-success dker pull-right"></b>
                                             <span>播放列表</span>
                                         </a>
                                     </li>
@@ -339,9 +339,9 @@
                     {% for music in music_list %}
                   <li class="list-group-item bg-info" >
                     <span class="pull-right" >
-                      <a href="#"><i class="fa fa-pencil fa-fw m-r-xs"></i></a>
-                      <a href="{% url 'addmusic' music.pk %}"><i class="fa fa-plus fa-fw m-r-xs"></i></a>
-                      <a href="#"><i class="fa fa-times fa-fw"></i></a>                  
+{#                      <a href="#"><i class="fa fa-pencil fa-fw m-r-xs"></i></a>#}
+                      <a href="{% url 'addfavormusic' music.pk %}"><i class="fa fa-plus fa-fw m-r-xs"></i></a>
+                      <a href="{% url 'delmusic' music.pk %}"><i class="fa fa-times fa-fw"></i></a>
                     </span>
                       <span class="pull-left media-xs"><i class="fa fa-sort text-muted fa m-r-sm"></i> <small>{{ music.author }} -- </small></span>
                     <a class="clear text-white" style="font-size: larger" href="{% url 'single_music' music.pk %}">

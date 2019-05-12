@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse,JsonResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import check_password, make_password
-from user.forms import Reg_form, Login_form,Usercommentsform,Mylistform
+from user.forms import Reg_form, Login_form,Usercommentsform,Mylistform,Myfavorlistform
 from music.models import Myusers
-from user.models import Singers,My_list,Music_info
+from user.models import Singers,My_list,Music_info,My_favorite
 from copy import deepcopy
 
 # Create your views here.
@@ -92,6 +92,41 @@ def addmusic(request,music_id):   #增加音乐到歌单
 
     except Exception:
         return HttpResponse('添加错误')
+
+def addfavormusic(request,music_id):   #增加音乐到歌单
+    refer_url = request.META['HTTP_REFERER']
+
+    # if request.method == 'GET':
+    #     form = Mylistform()
+    #     return redirect(refer_url)
+    list_dic={'user_id':request.user.pk,'music_id':int(music_id)}
+    form = Myfavorlistform(list_dic)
+    if not form.is_valid():
+        return HttpResponse('填写格式有误')
+    try:
+        form.save()
+
+        return redirect(refer_url)
+
+    except Exception:
+        return HttpResponse('添加错误')
+
+def deletmusic(request,music_id):
+    refer_url = request.META['HTTP_REFERER']
+    user_id = request.user.pk
+    data = My_list.objects.filter(user_id=user_id,music_id=music_id)
+
+    data[0].delete()
+    return redirect(refer_url)
+def deletfavormusic(request,music_id):
+    refer_url = request.META['HTTP_REFERER']
+    user_id = request.user.pk
+    data = My_favorite.objects.filter(user_id=user_id,music_id=music_id)
+
+    data[0].delete()
+    return redirect(refer_url)
+
+
 def showlist(request):
     user_id = request.user.pk
     user_list = []

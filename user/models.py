@@ -14,20 +14,20 @@ class Singers(models.Model):  #所有歌手
 
     def __str__(self):
         return self.name
-class My_list(models.Model): #测试用的个人歌单
+class My_list(models.Model): #个人歌单
     music_id = models.CharField(max_length=255,verbose_name="歌曲")
     user_id = models.CharField(max_length=255,verbose_name="用户")
 
 
 class My_favorite(models.Model):
-    music_name = models.CharField(max_length=255, verbose_name="音乐名")
-    author = models.CharField(max_length=255, verbose_name="歌手")
+    music_id = models.CharField(max_length=255, verbose_name="歌曲")
+    user_id = models.CharField(max_length=255, verbose_name="用户")
 
 
 class User_list(models.Model):  #测试用的个人歌单
     user = models.ForeignKey(Myusers,verbose_name="用户名")
     music_name = models.ForeignKey(Music_info,verbose_name='歌曲名')
 
-class User_favorite(models.Model):
+class User_favorite(models.Model):#测试用的个人歌单
     user = models.ForeignKey(Myusers, verbose_name="用户名")
     music_name = models.ForeignKey(Music_info, verbose_name='歌曲名')

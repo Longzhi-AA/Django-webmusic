@@ -282,15 +282,15 @@
                                         Playlist
                                     </li>
                                     <li>
-                                        <a href="{% url 'list' %}">
+                                        <a href="{% url 'favorlist' %}">
                                             <i class="icon-music-tone icon"></i>
-                                            <span>我的歌单</span>
+                                            <span>我喜欢</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{% url 'list' %}">
                                             <i class="icon-playlist icon text-success-lter"></i>
-                                            <b class="badge bg-success dker pull-right">9</b>
+                                            <b class="badge bg-success dker pull-right">{{ user_list.length }}</b>
                                             <span>播放列表</span>
                                         </a>
                                     </li>
@@ -930,7 +930,7 @@
                                     <div class="col-md-5">
                                         <h3 class="font-thin">音乐排行榜</h3>
                                         <div class="list-group bg-white list-group-lg no-bg auto">
-                                            {% for rank in ranks|slice:'0:8' %}
+                                            {% for rank in ranks|slice:'0:7' %}
                                                 {% for singer in singers %}
                                                     {% if rank.author == singer.name %}
                                                         <a href="{% url 'single_music' rank.pk %}" class="list-group-item clearfix">
