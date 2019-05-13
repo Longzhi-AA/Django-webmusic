@@ -364,7 +364,7 @@
                                             <div class="item">
                                                 <div class="pos-rlt">
                                                     <div class="bottom">
-                                                        <span class="badge bg-info m-l-sm m-b-sm">03:20</span>
+                                                        <span class="badge bg-info m-l-sm m-b-sm">&nbsp;</span>
                                                     </div>
                                                     <div class="item-overlay opacity r r-2x bg-black">
                                                         <div class="text-info padder m-t-sm text-sm">
@@ -375,13 +375,13 @@
                                                             <i class="fa fa-star-o text-muted"></i>
                                                         </div>
                                                         <div class="center text-center m-t-n">
-                                                            <a href="{% url 'single_music' music.pk %}" onclick="f()"><i class="icon-control-play i-2x"></i></a>
+{#                                                            <a href="{% url 'single_music' music.pk %}" onclick="f()"><i class="icon-control-play i-2x"></i></a>#}
                                                         </div>
                                                         <div class="bottom padder m-b-sm">
-                                                            <a href="{% url 'single_music' music.pk %}" class="pull-right" onclick="f()">
+                                                            <a href="{% url 'addfavormusic' music.pk %}" class="pull-right" onclick="f()">
                                                                 <i class="fa fa-heart-o"></i>
                                                             </a>
-                                                            <a href="" onclick="f()">
+                                                            <a href="{% url 'addmusic' music.pk %}" onclick="f()">
                                                                 <i class="fa fa-plus-circle"></i>
                                                             </a>
                                                         </div>

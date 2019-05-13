@@ -33,27 +33,29 @@ def pagein(request):  #分页函数
 
 
 def list(request): #歌单
-    datas = My_list.objects.filter(user_id=request.user.pk)
-    music_list = []
-    for data in datas:
-        music = Music_info.objects.get(pk=data.music_id)
-        music_list.append(music)
-    # print(music_list)
-
-    return render(request, 'list.html',{'music_list':music_list})
-def favorlist(request): #歌单
-    music_list = []
+    user_id = request.user.pk
+    user_list = []
     try:
-        datas = My_favorite.objects.filter(user_id=request.user.pk)
+        for user_music in My_list.objects.filter(user_id=user_id).order_by('-id'):
+            music_info = Music_info.objects.get(pk=user_music.music_id)
+            user_list.append(music_info)
     except Exception:
-        return music_list
+        return user_list
 
-    for data in datas:
-        music = Music_info.objects.get(pk=data.music_id)
-        music_list.append(music)
-    # print(music_list)
+    return render(request, 'list.html',{'user_list':user_list})
 
-    return render(request, 'favorlist.html',{'music_list':music_list})
+
+def favorlist(request): #歌单
+    user_id = request.user.pk
+    user_list = []
+    try:
+        for user_music in My_favorite.objects.filter(user_id=user_id).order_by('-id'):
+            music_info = Music_info.objects.get(pk=user_music.music_id)
+            user_list.append(music_info)
+    except Exception:
+        return user_list
+
+    return render(request, 'favorlist.html',{'music_list':user_list})
 
 
 def single(request,music_id): #单个音乐加载并播放

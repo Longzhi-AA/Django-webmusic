@@ -73,7 +73,7 @@ def user_comments(request,music_id):  #用户评论
     try:
         res_data.save()
     except Exception:
-        return  HttpResponse('用户不能重复评论')
+        return HttpResponse('用户不能重复评论')
     return redirect(refer_url)
 
 def addmusic(request,music_id):   #增加音乐到歌单
