@@ -25,7 +25,7 @@
       <a class="navbar-brand block" href="{% url 'index' %}"><span class="h1 font-bold">Musik</span></a>
       <section class="m-b-lg">
         <header class="wrapper text-center">
-          <strong>Sign in to get in touch</strong>
+          <strong>注册，有惊喜哦！</strong>
         </header>
         <form action="{% url 'user_login' %}" method="POST">
             <div class="form-group">
@@ -37,11 +37,11 @@
           <div class="form-group">
              <input type="password" name='password' placeholder="Password" class="form-control rounded input-lg text-center no-border">
           </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign in</span></button>
-          <div class="text-center m-t m-b"><a href="#"><small>Forgot password?</small></a></div>
+          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
+          <div class="text-center m-t m-b"><a href="#"><small>忘记密码?</small></a></div>
           <div class="line line-dashed"></div>
-          <p class="text-muted text-center"><small>Do not have an account?</small></p>
-          <a href="{% url 'user_signup' %}" class="btn btn-lg btn-info btn-block rounded">Create an account</a>
+          <p class="text-muted text-center"><small>还没创建过账户?</small></p>
+          <a href="{% url 'user_signup' %}" class="btn btn-lg btn-info btn-block rounded">创建账户</a>
         </form>
       </section>
     </div>

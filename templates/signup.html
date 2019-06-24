@@ -25,7 +25,7 @@
       <a class="navbar-brand block" href="{% url 'index' %}"><span class="h1 font-bold">Musik</span></a>
       <section class="m-b-lg">
         <header class="wrapper text-center">
-          <strong>Sign up to find interesting thing</strong>
+          <strong>注册获得更多有趣内容哦！</strong>
         </header>
         <form action="{% url 'user_signup' %}" method="POST">
           <div class="form-group">
@@ -39,13 +39,13 @@
           </div>
           <div class="checkbox i-checks m-b">
             <label class="m-l">
-              <input type="checkbox" checked=""><i></i> Agree the <a href="#">terms and policy</a>
+              <input type="checkbox" checked=""><i></i> 同意 <a href="#">terms and policy</a>
             </label>
           </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign up</span></button>
+          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">注册</span></button>
           <div class="line line-dashed"></div>
-          <p class="text-muted text-center"><small>Already have an account?</small></p>
-          <a href="{% url 'user_login' %}" class="btn btn-lg btn-info btn-block btn-rounded">Sign in</a>
+          <p class="text-muted text-center"><small>已有用户名?</small></p>
+          <a href="{% url 'user_login' %}" class="btn btn-lg btn-info btn-block btn-rounded">登录</a>
         </form>
       </section>
     </div>
